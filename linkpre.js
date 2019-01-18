@@ -5,7 +5,17 @@
 
             divs.forEach(function(div) {
 
-                 url = $(div).find("a").attr("href")
+                if ($(div).has("a")){
+                     url = $(div).find("a").attr("href");
+                    //  console.log(url)
+                 }
+
+                 else{
+                 string = div.innerHTML
+                  url = string.match(/\bhttps?:\/\/\S+/gi);
+                //   console.log(url)
+
+                 }
                  div.innerHTML = "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>"
 
             	var ur="https://infinite-retreat-77775.herokuapp.com/?url=" + url;

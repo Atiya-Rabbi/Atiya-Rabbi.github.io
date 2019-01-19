@@ -5,15 +5,16 @@
 
             divs.forEach(function(div) {
 
-                if ($(div).has("a")){
+                if (div.children.length >0){
                      url = $(div).find("a").attr("href");
-                    //  console.log(url)
+                     console.log(url)
                  }
 
                  else{
+                     console.log("here")
                  string = div.innerHTML
                   url = string.match(/\bhttps?:\/\/\S+/gi);
-                //   console.log(url)
+                  console.log(url)
 
                  }
                  div.innerHTML = "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>"

@@ -1,30 +1,36 @@
-
-
-            var divs = document.querySelectorAll('.preview')
+var divs = document.querySelectorAll('.preview')
 
 
             divs.forEach(function(div) {
 
                 if (div.children.length >0){
                      url = $(div).find("a").attr("href");
-                     console.log(url)
+
+                     if(!url){
+                        string = div.children[0].innerHTML;
+                        url = string.match(/\bhttps?:\/\/\S+/gi);
+                                             }
                  }
 
                  else{
                      console.log("here")
                  string = div.innerHTML
                   url = string.match(/\bhttps?:\/\/\S+/gi);
-                  console.log(url)
+
 
                  }
-                 div.innerHTML = "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>"
+                 let div1 = document.createElement('div');
+                 div.style.paddingBottom = "40px";
+
+                 div1.innerHTML = "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>"
+                 div.appendChild(div1);
 
             	var ur="https://infinite-retreat-77775.herokuapp.com/?url=" + url;
             	$.ajax({
             	    url:ur,
             	method:"GET",
                 success: function(response){
-                div.innerHTML = response;
+                div1.innerHTML = response;
                     }
             	})
 

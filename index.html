@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <title>
+
+        </title>
+        <style>
+        #b1{
+          width:500px;
+          height:300px;
+          margin-left: 225px;
+        margin-top: 30px;
+        }
+        section{width:100%; height:auto;padding-top:100px;padding-bottom:100px;}
+        h1{text-align:center;}
+        #Home{background:white;}
+        #Howtouse{background:#f1f1eb;}
+        #Examples{background:white;}
+        #Contact{background:#90abc778;}
+
+        </style>
+
+
+	</head>
+
+
+	<body>
+	    <header>
+	    	<nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Link Preview</a>
+  </div>
+  <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#Home">Home</a></li>
+          <li><a href="#Howtouse">How to Use</a></li>
+          <li><a href="#Examples">Examples</a></li>
+          <li><a href="#Contact">Contact Us</a></li>
+          <li><a href="https://atiya-rabbi.github.io/privacy.html">Privacy Policy</a></li>
+      </ul>
+  </div>
+    </div>
+
+        </nav>
+      </header>
+
+		<section id="Home">
+			<div class="container">
+            <h1 style="text-align:left;">
+                Having Trouble Previewing URLs?
+            </h1>
+            <h2 class="text-info">
+                You're on the Right Place
+            </h2>
+        <div class="form-group" style="max-width:350px;">
+          <input type="text" id="srchurl" class="form-control" placeholder="http://...">
+        </div>
+        <button type="submit" onclick="openTab();" class="btn btn-info">
+            Preview
+        </button>
+
+        <div id="b1" class="containerTab" style="max-width: 500px;display: none;background: rgb(248, 248, 248);margin-left: 0px; width:100%">
+          <span>
+        <input style="position: absolute;" type='button' class="btn" value='X' onclick='closeClick()'>
+      </span>
+
+      </div>
+      <h2 class="text-warning">All it needs is One Script and you're Done.</h2>
+            <h4>Now your website can preview URLs with this service, saving your time and money.</h4>
+            <h2 class="text-warning">How it Works?</h2>
+            <h4>
+            	The script helps to pick the divs with class name 'preview' which ultimately takes out the URL from the div.<br>
+            	After extracting the necessary data for previewing from the URL a div is send back to the corresponding<br>
+            	div with all the previewing material packed in it.
+            </h4>
+       </div>
+        <script type="text/javascript">
+            function openTab() {
+
+              document.getElementById('b1').style.display = "block";
+              url = document.getElementById("srchurl").value;
+              console.log(url)
+              document.getElementById("b1").innerHTML = "<span><input style='position: absolute;' type='button' class='btn' value='X' onclick='closeClick()'></span>" + "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>";
+              var ur="https://infinite-retreat-77775.herokuapp.com/?url=" + url;
+                $.ajax({
+                    url:ur,
+                method:"GET",
+                success: function(response){
+                document.getElementById("b1").innerHTML = "<span><input style='position: absolute;' type='button' class='btn' value='X' onclick='closeClick()'></span>" + response;
+                    }
+                })
+              sessionStorage.setItem('clicked', true);
+            }
+            function closeClick() {
+                document.getElementById('b1').style.display = "none";
+                sessionStorage.removeItem('clicked');
+            }
+            window.onload = function () {
+            var data = sessionStorage.getItem('clicked');
+            if (data == 'true') {
+                openTab();
+            }
+        };
+            </script>
+		</section>
+
+		<section id="Howtouse">
+			<h1 class="text-dark">How to Use?</h1>
+			<div class="container">
+				<h2 class="text-secondary">Previewing URLs has never been so Easy</h2>
+				<div class="panel panel-default">
+			    <div class="panel-heading">You only need to include the following Script</div>
+			    <div class="panel-body">
+			    		<div class="divcenter left hidden-xs " style="max-width: 900px;  border: 5px dotted rgb(26, 188, 156); padding: 5px;">
+								<h4 class="nobottommargin" style="font-family: courier;">
+							&nbsp; &lt;script <br>
+							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; src="http://atiya-rabbi.github.io/linkpre.js"&gt;<br>
+							&nbsp;&lt;/script&gt;
+								</h4>
+							</div>
+							<div class="divcenter left visible-xs " style="max-width: 900px; font-size:smaller; border: 5px dotted rgb(26, 188, 156); padding: 5px;">
+
+							&nbsp; &lt;script <br>
+							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;src="http://atiya-rabbi.github.io/linkpre.js"&gt;<br>
+							&nbsp;&lt;/script&gt;
+
+							</div>
+			    </div>
+			    <div class="panel-footer">
+			    	<h3>Steps to follow-</h3>
+			    	<br>
+			    	<li>
+			    		Include the JQuery Script in the head tag as follows:
+			    		<pre>&lt;script src="https://code.jquery.com/jquery-3.1.1.min.js"&gt;&lt;/script&gt;&lt;/pre&gt;
+			    	</li>
+			    	<li>
+			    		Assign the class name of div as 'preview' which contains URL as follows:
+			    		<pre>&lt;div class="preview"&gt;&lt;a href="http://thelady25.com"&gt;&lt;/a&gt;&lt;/div&gt;
+			    		</pre>
+			    	</li>
+			    	<li>
+			    		You need to include the below script in your html page before closing the body tag as follows:
+			    		<pre>&lt;script src="http://atiya-rabbi.github.io/linkpre.js"&gt; &lt;/script&gt; &lt;/body&gt;
+			    		</pre>
+			    	</li>
+
+			    	<li>
+			    		You can style the div with class name 'preview' accordingly
+			    	</li>
+			    	<br>
+			    	<li>
+			    		Hurrah! now your website is ready to preview URLs
+			    	</li>
+			    	<h3>For more assistance you may go through the examples</h3>
+			    </div>
+  			</div>
+			</div>
+
+		</section>
+
+		<section id="Examples" style="
+    padding-top: 70px;">
+			<h1>Examples</h1>
+
+				<div class="panel-body">
+			<pre style="font-family: courier;">
+&lt;html&gt;
+&lt;head&gt;
+  &lt;script src="https://code.jquery.com/jquery-3.1.1.min.js"&gt;&lt;/script&gt;
+  &lt;style&gt;
+  /* according to your need */
+	.preview {
+               width:450px;
+               height:300px;
+	}
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;div class="preview"&gt;
+   	https://www.youtube.com/watch?v=JXe9UOLMfOw.
+   &lt;/div&gt;
+   &lt;br&gt;
+   &lt;div class="preview"&gt;
+   	&lt;a href="http://thelady25.com/the-lady25"&gt;&lt;/a&gt;
+   &lt;/div&gt;
+   &lt;script src="http://atiya-rabbi.github.io/linkpre.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div class="container" style="text-align: center;">
+	<a href="https://atiya-rabbi.github.io/example1.html" target="_blank" type="button" class="btn btn-primary btn-lg">Open In Browser</a>
+</div>
+		</section>
+
+			<!--Section: Contact v.2-->
+<section id="Contact">
+	<div  class="container">
+
+    <!--Section heading-->
+    <h2>Contact us</h2>
+    <!--Section description-->
+    <h4>Do you have any questions? Please do not hesitate to contact us directly.<br>Our team will come back to you within a matter of hours to help you.</h4>
+    <button type="button" class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-envelope"></span> Email Us
+        </button>
+
+    <h4>juhi33rabbi@gmail.com</h4>
+<!--Section: Contact v.2-->
+<div class="panel-default" >
+	<h4 class="panel-heading">NOTE: You're solely responsible for the content you preview with our script.</h4>
+	</div>
+	</div>
+
+</section>
+
+<footer class="container" style="padding-bottom: 25px;
+    padding-top: 25px; background-color: #f8f8f8;
+    color: black; width:100%">
+  <p style="text-align: center; margin-bottom: 0px">Link Preview 2019 | All Rights Reserved&copy</p>
+
+</footer>
+
+
+	</body>
+
+
+
+</html>

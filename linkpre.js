@@ -13,19 +13,28 @@ var divs = document.querySelectorAll('.preview')
                  }
 
                  else{
-                     console.log("here")
+
                  string = div.innerHTML
                   url = string.match(/\bhttps?:\/\/\S+/gi);
 
 
                  }
+
+                 url = String(url)
+
+                 if (!url.startsWith("http")){
+                    url = "http://" + url
+                 }
+
                  let div1 = document.createElement('div');
-                 div.style.paddingBottom = "40px";
+                 div.style.paddingBottom= "40px";
 
                  div1.innerHTML = "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>"
                  div.appendChild(div1);
 
+
             	var ur="https://infinite-retreat-77775.herokuapp.com/?url=" + url;
+
             	$.ajax({
             	    url:ur,
             	method:"GET",

@@ -93,7 +93,9 @@
 
               document.getElementById('b1').style.display = "block";
               url = document.getElementById("srchurl").value;
-              console.log(url)
+              if (!url.startsWith("http")){
+                    url = "http://" + url
+                 }
               document.getElementById("b1").innerHTML = "<span><input style='position: absolute;' type='button' class='btn' value='X' onclick='closeClick()'></span>" + "<img src='https://atiya-rabbi.github.io/loading.gif' style='width:100%;height:100%;'>";
               var ur="https://infinite-retreat-77775.herokuapp.com/?url=" + url;
                 $.ajax({
